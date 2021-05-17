@@ -5,8 +5,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import br.zom.zup.academy.dominio.modelo.Autor;
-import br.zom.zup.academy.dominio.repository.AutorRepository;
-import br.zom.zup.academy.exception.ValidacaoException;
 
 public class AutorForm {
 
@@ -25,14 +23,18 @@ public class AutorForm {
 		this.email = email;
 		this.descricao = descricao;
 	}
-
-	public Autor toAutor(AutorRepository autorRepository) {
-		if(!emailJaEstaCadastrado(autorRepository))
-			return new Autor(this.nome, this.email, this.descricao);
-		throw new ValidacaoException("Email informado já foi cadastrado!");
+	
+	public String getEmail() {
+		return email;
 	}
 
-	private boolean emailJaEstaCadastrado(AutorRepository autorRepository) {
-		return autorRepository.findByEmail(this.email).isPresent();
+	public Autor toAutor() {
+//		if(!emailJaEstaCadastrado(autorRepository))
+		return new Autor(this.nome, this.email, this.descricao);
+//		throw new ValidacaoException("Email informado já foi cadastrado!");
 	}
+
+//	private boolean emailJaEstaCadastrado(AutorRepository autorRepository) {
+//		return autorRepository.findByEmail(this.email).isPresent();
+//	}
 }
