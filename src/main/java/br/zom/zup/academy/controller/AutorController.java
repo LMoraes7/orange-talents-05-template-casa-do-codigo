@@ -3,6 +3,7 @@ package br.zom.zup.academy.controller;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,9 @@ public class AutorController {
 	}
 
 	@PostMapping
+	@Transactional
 	public ResponseEntity<?> cadastrar(@RequestBody @Valid AutorForm autorForm) {
-		Autor autor = autorForm.toAutor();
+		Autor autor = autorForm.toAutor(this.autorRepository);
 		this.autorRepository.save(autor);
 //		Minha ideia era retornar 201 com um AlunoDto no corpo da requisição, 
 //		porém no desafio pedia para retornar 200 sem nada no corpo.
