@@ -4,8 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,20 +19,20 @@ import br.com.zup.academy.dominio.validator.ProibeEmailDuplicadoAutorValidator;
 public class AutorController {
 
 	private AutorRepository autorRepository;
-	private ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator;
+//	private ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator;
 
 	public AutorController(AutorRepository autorRepository,
 			ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator) {
 		this.autorRepository = autorRepository;
-		this.proibeEmailDuplicadoAutorValidator = proibeEmailDuplicadoAutorValidator;
+//		this.proibeEmailDuplicadoAutorValidator = proibeEmailDuplicadoAutorValidator;
 	}
 
 //	Esse método irá executar a lógica de validações customizadas que foram passadas no .addValidators().
 //	Esse método será executado de forma paralela a requisição feita pelo usuário
-	@InitBinder
-	public void init(WebDataBinder binder) {
-		binder.addValidators(proibeEmailDuplicadoAutorValidator);
-	}
+//	@InitBinder
+//	public void init(WebDataBinder binder) {
+//		binder.addValidators(proibeEmailDuplicadoAutorValidator);
+//	}
 
 	@PostMapping
 	@Transactional

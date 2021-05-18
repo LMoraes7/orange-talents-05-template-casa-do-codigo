@@ -4,8 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,18 +19,18 @@ import br.com.zup.academy.dominio.validator.ProibeNomeDuplicadoCategoriaValidato
 public class CategoriaController {
 
 	private CategoriaRepository categoriaRepository;
-	private ProibeNomeDuplicadoCategoriaValidator proibeNomeDuplicadoCategoriaValidator;
+//	private ProibeNomeDuplicadoCategoriaValidator proibeNomeDuplicadoCategoriaValidator;
 
 	public CategoriaController(CategoriaRepository categoriaRepository,
 			ProibeNomeDuplicadoCategoriaValidator proibeNomeDuplicadoCategoriaValidator) {
 		this.categoriaRepository = categoriaRepository;
-		this.proibeNomeDuplicadoCategoriaValidator = proibeNomeDuplicadoCategoriaValidator;
+//		this.proibeNomeDuplicadoCategoriaValidator = proibeNomeDuplicadoCategoriaValidator;
 	}
 
-	@InitBinder
-	public void init(WebDataBinder binder) {
-		binder.addValidators(proibeNomeDuplicadoCategoriaValidator);
-	}
+//	@InitBinder
+//	public void init(WebDataBinder binder) {
+//		binder.addValidators(proibeNomeDuplicadoCategoriaValidator);
+//	}
 
 	@PostMapping
 	@Transactional

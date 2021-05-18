@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import br.com.zup.academy.dominio.modelo.Autor;
+import br.com.zup.academy.dominio.validator.UniqueValue;
 
 public class AutorForm {
 
@@ -14,6 +15,7 @@ public class AutorForm {
 	private String nome;
 	@NotBlank
 	@Email
+	@UniqueValue(fieldName = "email", domainClass = Autor.class, message = "O Email informado já consta no cadastro")
 	private String email;
 	@NotBlank
 	@Size(max = 400)
