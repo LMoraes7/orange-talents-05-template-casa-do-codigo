@@ -8,20 +8,22 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.constraints.NotBlank;
 
-import br.com.zup.academy.dominio.validator.DataFutureValidValidator;
+import br.com.zup.academy.dominio.validator.ExistsIdValidator;
 
 @Documented
-@Constraint(validatedBy = {DataFutureValidValidator.class})
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.CONSTRUCTOR, ElementType.FIELD})
-@NotBlank
-public @interface DataFutureValid {
+@Constraint(validatedBy = { ExistsIdValidator.class })
+public @interface ExistsId {
+
+	String message() default "A entidade não existe";
 	
-	String message() default "A data informada precisa ser posterior a data de hoje";
+	Class<?>[] groups() default{};
+	
+	Class<? extends Payload>[] payload() default{}; 
+	
+	Class<?> domainClass();
 
-	Class<?>[] groups() default {};
-
-	Class<? extends Payload>[] payload() default {};
+	String field();
 }

@@ -3,22 +3,21 @@ package br.com.zup.academy.controller.form;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.EntityManager;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 import br.com.zup.academy.dominio.modelo.Autor;
 import br.com.zup.academy.dominio.modelo.Categoria;
 import br.com.zup.academy.dominio.modelo.Livro;
-import br.com.zup.academy.dominio.repository.AutorRepository;
-import br.com.zup.academy.dominio.repository.CategoriaRepository;
-import br.com.zup.academy.dominio.validator.anotacao.DataFutureValid;
-import br.com.zup.academy.dominio.validator.anotacao.ExistsEntity;
-import br.com.zup.academy.dominio.validator.anotacao.PrecoValid;
+import br.com.zup.academy.dominio.validator.anotacao.ExistsId;
 import br.com.zup.academy.dominio.validator.anotacao.UniqueValue;
 
 public class LivroForm {
@@ -30,24 +29,28 @@ public class LivroForm {
 	private String resumo;
 	@NotBlank
 	private String sumario;
-	@PrecoValid(min = 20)
-	private String preco;
+	@NotNull
+	@Min(20)
+	private BigDecimal preco;
 	@NotNull
 	@Min(100)
 	private Integer paginas;
 	@UniqueValue(fieldName = "identificador", domainClass = Livro.class)
 	private String identificador;
-	@DataFutureValid
-	private String dataPublicacao;
-	@ExistsEntity(domainClass = Categoria.class)
+	@Future
+	@JsonFormat(pattern = "dd/MM/yyyy", shape = Shape.STRING)
+	private LocalDate dataPublicacao;
+	@NotNull
+	@ExistsId(domainClass = Categoria.class, field = "id")
 	private Long categoriaId;
-	@ExistsEntity(domainClass = Autor.class)
+	@NotNull
+	@ExistsId(domainClass = Autor.class, field = "id")
 	private Long autorId;
 
 	@JsonCreator
-	public LivroForm(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo, @NotEmpty String sumario,
-			String preco, @NotNull @Min(100) Integer paginas, @NotBlank String identificador, String dataPublicacao,
-			Long categoriaId, Long autorId) {
+	public LivroForm(String titulo, @NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
+			@NotNull @Min(20) BigDecimal preco, @NotNull @Min(100) Integer paginas, String identificador,
+			@Future LocalDate dataPublicacao, @NotNull Long categoriaId, @NotNull Long autorId) {
 		this.titulo = titulo;
 		this.resumo = resumo;
 		this.sumario = sumario;
@@ -59,10 +62,10 @@ public class LivroForm {
 		this.autorId = autorId;
 	}
 
-	public Livro toLivro(CategoriaRepository categoriaRepository, AutorRepository autorRepository) {
-		Categoria categoria = categoriaRepository.findById(this.categoriaId).get();
-		Autor autor = autorRepository.findById(this.autorId).get();
-		return new Livro(this.titulo, this.resumo, this.sumario, new BigDecimal(this.preco), this.paginas,
-				this.identificador, LocalDate.parse(this.dataPublicacao), categoria, autor);
+	public Livro toLivro(EntityManager manager) {
+		@NotNull Categoria categoria = manager.find(Categoria.class, this.categoriaId);
+		@NotNull Autor autor = manager.find(Autor.class, this.autorId);
+		return new Livro(this.titulo, this.resumo, this.sumario, this.preco, this.paginas,
+				this.identificador, this.dataPublicacao, categoria, autor);
 	}
 }

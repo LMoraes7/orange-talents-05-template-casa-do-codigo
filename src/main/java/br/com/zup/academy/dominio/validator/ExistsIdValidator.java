@@ -8,28 +8,27 @@ import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import br.com.zup.academy.dominio.validator.anotacao.ExistsEntity;
+import br.com.zup.academy.dominio.validator.anotacao.ExistsId;
 
-public class ExistsIdValidator implements ConstraintValidator<ExistsEntity, Number>{
+public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object>{
 
-	private Class<?> domainClass;
+	private Class<?> classe;
+	private String campo;
 	
 	@PersistenceContext
 	private EntityManager manager;
 
 	@Override
-	public void initialize(ExistsEntity constraintAnnotation) {
-		domainClass = constraintAnnotation.domainClass();
+	public void initialize(ExistsId constraintAnnotation) {
+		classe = constraintAnnotation.domainClass();
+		campo = constraintAnnotation.field();
 	}
 	
 	@Override
-	public boolean isValid(Number value, ConstraintValidatorContext context) {
-		Query query = this.manager.createQuery("SELECT 1 FROM "+domainClass.getName()+" WHERE id = :id")
-				.setParameter("id", value);
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		Query query = this.manager.createQuery("SELECT 1 FROM "+this.classe.getName()+" WHERE "+this.campo+" = :id")
+			.setParameter("id", value);
 		List<?> list = query.getResultList();
-		boolean estaVazia = list.isEmpty();
-//		false
-//		Assert.state(list.size() >= 1, "Não existe um(a) " + domainClass + " com esse identificador");
-		return !estaVazia; //true
+		return !(list.isEmpty());
 	}
 }
