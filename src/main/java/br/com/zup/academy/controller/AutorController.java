@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.zup.academy.controller.form.AutorForm;
 import br.com.zup.academy.dominio.modelo.Autor;
 import br.com.zup.academy.dominio.repository.AutorRepository;
-import br.com.zup.academy.dominio.validator.ProibeEmailDuplicadoAutorValidator;
 
 @RestController
 @RequestMapping("/autores")
@@ -21,8 +20,7 @@ public class AutorController {
 	private AutorRepository autorRepository;
 //	private ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator;
 
-	public AutorController(AutorRepository autorRepository,
-			ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator) {
+	public AutorController(AutorRepository autorRepository) {
 		this.autorRepository = autorRepository;
 //		this.proibeEmailDuplicadoAutorValidator = proibeEmailDuplicadoAutorValidator;
 	}

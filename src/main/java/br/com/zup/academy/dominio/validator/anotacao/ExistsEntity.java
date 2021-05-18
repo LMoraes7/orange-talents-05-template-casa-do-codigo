@@ -1,4 +1,4 @@
-package br.com.zup.academy.dominio.validator;
+package br.com.zup.academy.dominio.validator.anotacao;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,22 +8,22 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import javax.validation.constraints.NotNull;
+
+import br.com.zup.academy.dominio.validator.ExistsIdValidator;
 
 @Documented
-// Informa a classe que implementa a validação da regra de negócio
-@Constraint(validatedBy = {UniqueValueValidator.class})
-// Informa os locais onde essa anotação pode ser usada
-@Target({ElementType.FIELD, ElementType.CONSTRUCTOR})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueValue {
+@Target({ElementType.CONSTRUCTOR, ElementType.FIELD})
+@Constraint(validatedBy = {ExistsIdValidator.class})
+@NotNull
+public @interface ExistsEntity {
 
-	String message() default "{javax.validation.constraints.UniqueValue.message}";
+	String message() default "Não existe uma entidade com esse identificador";
 	
 	Class<?>[] groups() default{};
 	
 	Class<? extends Payload>[] payload() default{}; 
-	
-	String fieldName();
 	
 	Class<?> domainClass();
 }

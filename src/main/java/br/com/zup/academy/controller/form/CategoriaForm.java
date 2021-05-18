@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import br.com.zup.academy.dominio.modelo.Categoria;
-import br.com.zup.academy.dominio.validator.UniqueValue;
+import br.com.zup.academy.dominio.validator.anotacao.UniqueValue;
 
 public class CategoriaForm {
 

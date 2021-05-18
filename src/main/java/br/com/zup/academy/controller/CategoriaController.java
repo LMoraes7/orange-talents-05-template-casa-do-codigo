@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.zup.academy.controller.form.CategoriaForm;
 import br.com.zup.academy.dominio.modelo.Categoria;
 import br.com.zup.academy.dominio.repository.CategoriaRepository;
-import br.com.zup.academy.dominio.validator.ProibeNomeDuplicadoCategoriaValidator;
 
 @RestController
 @RequestMapping("/categorias")
@@ -21,8 +20,7 @@ public class CategoriaController {
 	private CategoriaRepository categoriaRepository;
 //	private ProibeNomeDuplicadoCategoriaValidator proibeNomeDuplicadoCategoriaValidator;
 
-	public CategoriaController(CategoriaRepository categoriaRepository,
-			ProibeNomeDuplicadoCategoriaValidator proibeNomeDuplicadoCategoriaValidator) {
+	public CategoriaController(CategoriaRepository categoriaRepository) {
 		this.categoriaRepository = categoriaRepository;
 //		this.proibeNomeDuplicadoCategoriaValidator = proibeNomeDuplicadoCategoriaValidator;
 	}

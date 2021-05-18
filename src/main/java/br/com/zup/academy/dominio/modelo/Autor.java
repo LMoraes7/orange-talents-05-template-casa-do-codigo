@@ -20,7 +20,7 @@ public class Autor {
 	private String email;
 	@Column(nullable = false, columnDefinition = "VARCHAR(400)")
 	private String descricao;
-	@Column(nullable = false)
+	@Column(nullable = false, name = "instante_cadastrado")
 	private LocalDateTime instanteCadastrado = LocalDateTime.now();
 
 	@Deprecated

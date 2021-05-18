@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import br.com.zup.academy.dominio.modelo.Autor;
-import br.com.zup.academy.dominio.validator.UniqueValue;
+import br.com.zup.academy.dominio.validator.anotacao.UniqueValue;
 
 public class AutorForm {
 

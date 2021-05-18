@@ -10,6 +10,8 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.util.Assert;
 
+import br.com.zup.academy.dominio.validator.anotacao.UniqueValue;
+
 //No Generics, informamos a anotação que iremos tratar e o que iremos receber para efetuar o tratamento da validação
 public class UniqueValueValidator implements ConstraintValidator<UniqueValue, Object>{
 
