@@ -1,4 +1,4 @@
-package br.zom.zup.academy.handler.dto;
+package br.com.zup.academy.handler.dto;
 
 public class ErroDeValidacaoDto {
 

@@ -1,10 +1,12 @@
-package br.zom.zup.academy.controller.form;
+package br.com.zup.academy.controller.form;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import br.zom.zup.academy.dominio.modelo.Autor;
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+import br.com.zup.academy.dominio.modelo.Autor;
 
 public class AutorForm {
 
@@ -17,6 +19,7 @@ public class AutorForm {
 	@Size(max = 400)
 	private String descricao;
 
+	@JsonCreator
 	public AutorForm(@NotBlank String nome, @NotBlank @Email String email,
 			@NotBlank @Size(max = 400) String descricao) {
 		this.nome = nome;
@@ -29,12 +32,6 @@ public class AutorForm {
 	}
 
 	public Autor toAutor() {
-//		if(!emailJaEstaCadastrado(autorRepository))
 		return new Autor(this.nome, this.email, this.descricao);
-//		throw new ValidacaoException("Email informado já foi cadastrado!");
 	}
-
-//	private boolean emailJaEstaCadastrado(AutorRepository autorRepository) {
-//		return autorRepository.findByEmail(this.email).isPresent();
-//	}
 }

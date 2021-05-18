@@ -1,4 +1,4 @@
-package br.zom.zup.academy.exception;
+package br.com.zup.academy.dominio.validator;
 
 import java.util.Optional;
 
@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import br.zom.zup.academy.controller.form.AutorForm;
-import br.zom.zup.academy.dominio.modelo.Autor;
-import br.zom.zup.academy.dominio.repository.AutorRepository;
+import br.com.zup.academy.controller.form.AutorForm;
+import br.com.zup.academy.dominio.modelo.Autor;
+import br.com.zup.academy.dominio.repository.AutorRepository;
 
 @Component
 public class ProibeEmailDuplicadoAutorValidator implements Validator {
@@ -35,6 +35,6 @@ public class ProibeEmailDuplicadoAutorValidator implements Validator {
 		AutorForm autorForm = (AutorForm) target;
 		Optional<Autor> autorOptional = this.autorRepository.findByEmail(autorForm.getEmail());
 		if(autorOptional.isPresent()) 
-			errors.rejectValue("email", null, "Email "+autorForm.getEmail()+" já foi cadastrado!");
+			errors.rejectValue("email", null, "Email -> "+autorForm.getEmail()+" já foi cadastrado!");
 	}
 }

@@ -1,4 +1,4 @@
-package br.zom.zup.academy.handler;
+package br.com.zup.academy.handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.zom.zup.academy.handler.dto.ErroDeValidacaoDto;
+import br.com.zup.academy.handler.dto.ErroDeValidacaoDto;
 
 @RestControllerAdvice
 public class ErroValidacaoFormularioHandler {

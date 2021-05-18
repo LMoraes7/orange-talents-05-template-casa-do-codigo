@@ -1,4 +1,4 @@
-package br.zom.zup.academy.controller;
+package br.com.zup.academy.controller;
 
 import javax.validation.Valid;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.zom.zup.academy.controller.form.AutorForm;
-import br.zom.zup.academy.dominio.modelo.Autor;
-import br.zom.zup.academy.dominio.repository.AutorRepository;
-import br.zom.zup.academy.exception.ProibeEmailDuplicadoAutorValidator;
+import br.com.zup.academy.controller.form.AutorForm;
+import br.com.zup.academy.dominio.modelo.Autor;
+import br.com.zup.academy.dominio.repository.AutorRepository;
+import br.com.zup.academy.dominio.validator.ProibeEmailDuplicadoAutorValidator;
 
 @RestController
 @RequestMapping("/autores")
@@ -22,12 +22,13 @@ public class AutorController {
 
 	private AutorRepository autorRepository;
 	private ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator;
-	
-	public AutorController(AutorRepository autorRepository, ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator) {
+
+	public AutorController(AutorRepository autorRepository,
+			ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator) {
 		this.autorRepository = autorRepository;
 		this.proibeEmailDuplicadoAutorValidator = proibeEmailDuplicadoAutorValidator;
 	}
-	
+
 //	Esse método irá executar a lógica de validações customizadas que foram passadas no .addValidators().
 //	Esse método será executado de forma paralela a requisição feita pelo usuário
 	@InitBinder

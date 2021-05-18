@@ -1,6 +1,4 @@
-package br.zom.zup.academy.dominio.modelo;
-
-import java.time.LocalDateTime;
+package br.com.zup.academy.dominio.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,28 +7,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Autor {
+public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable = false)
-	private String nome;
 	@Column(unique = true, nullable = false)
-	private String email;
-	@Column(nullable = false, columnDefinition = "VARCHAR(400)")
-	private String descricao;
-	@Column(nullable = false)
-	private LocalDateTime instanteCadastrado = LocalDateTime.now();
+	private String nome;
 
 	@Deprecated
-	public Autor() {
+	public Categoria() {
 	}
 
-	public Autor(String nome, String email, String descricao) {
+	public Categoria(String nome) {
 		this.nome = nome;
-		this.email = email;
-		this.descricao = descricao;
 	}
 
 	@Override
@@ -49,7 +39,7 @@ public class Autor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Autor other = (Autor) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
