@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.constraints.NotBlank;
 
 import br.com.zup.academy.dominio.validator.UniqueValueValidator;
 
@@ -18,7 +17,6 @@ import br.com.zup.academy.dominio.validator.UniqueValueValidator;
 // Informa os locais onde essa anotação pode ser usada
 @Target({ElementType.FIELD, ElementType.CONSTRUCTOR})
 @Retention(RetentionPolicy.RUNTIME)
-@NotBlank
 public @interface UniqueValue {
 
 	String message() default "O valor informado já está cadastrado";

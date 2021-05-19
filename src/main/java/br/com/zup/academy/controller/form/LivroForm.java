@@ -22,6 +22,7 @@ import br.com.zup.academy.dominio.validator.anotacao.UniqueValue;
 
 public class LivroForm {
 
+	@NotBlank
 	@UniqueValue(fieldName = "titulo", domainClass = Livro.class)
 	private String titulo;
 	@NotBlank
@@ -35,6 +36,7 @@ public class LivroForm {
 	@NotNull
 	@Min(100)
 	private Integer paginas;
+	@NotBlank
 	@UniqueValue(fieldName = "identificador", domainClass = Livro.class)
 	private String identificador;
 	@Future
@@ -48,9 +50,10 @@ public class LivroForm {
 	private Long autorId;
 
 	@JsonCreator
-	public LivroForm(String titulo, @NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
-			@NotNull @Min(20) BigDecimal preco, @NotNull @Min(100) Integer paginas, String identificador,
+	public LivroForm(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
+			@NotNull @Min(20) BigDecimal preco, @NotNull @Min(100) Integer paginas, @NotBlank String identificador,
 			@Future LocalDate dataPublicacao, @NotNull Long categoriaId, @NotNull Long autorId) {
+		super();
 		this.titulo = titulo;
 		this.resumo = resumo;
 		this.sumario = sumario;
@@ -63,9 +66,11 @@ public class LivroForm {
 	}
 
 	public Livro toLivro(EntityManager manager) {
-		@NotNull Categoria categoria = manager.find(Categoria.class, this.categoriaId);
-		@NotNull Autor autor = manager.find(Autor.class, this.autorId);
-		return new Livro(this.titulo, this.resumo, this.sumario, this.preco, this.paginas,
-				this.identificador, this.dataPublicacao, categoria, autor);
+		@NotNull
+		Categoria categoria = manager.find(Categoria.class, this.categoriaId);
+		@NotNull
+		Autor autor = manager.find(Autor.class, this.autorId);
+		return new Livro(this.titulo, this.resumo, this.sumario, this.preco, this.paginas, this.identificador,
+				this.dataPublicacao, categoria, autor);
 	}
 }
