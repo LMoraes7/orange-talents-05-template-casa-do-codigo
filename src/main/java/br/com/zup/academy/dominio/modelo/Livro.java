@@ -29,7 +29,7 @@ public class Livro {
 	private Integer paginas;
 	@Column(nullable = false, unique = true)
 	private String identificador;
-	@Column(name = "DATA_PUBLICACAO")
+	@Column(name = "data_publicacao")
 	private LocalDate dataPublicacao;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -61,6 +61,34 @@ public class Livro {
 	
 	public String getTitulo() {
 		return titulo;
+	}
+	
+	public String getResumo() {
+		return resumo;
+	}
+	
+	public String getSumario() {
+		return sumario;
+	}
+	
+	public BigDecimal getPreco() {
+		return preco;
+	}
+	
+	public Integer getPaginas() {
+		return paginas;
+	}
+	
+	public String getIdentificador() {
+		return identificador;
+	}
+	
+	public LocalDate getDataPublicacao() {
+		return dataPublicacao;
+	}
+	
+	public Autor getAutor() {
+		return autor;
 	}
 
 	@Override
