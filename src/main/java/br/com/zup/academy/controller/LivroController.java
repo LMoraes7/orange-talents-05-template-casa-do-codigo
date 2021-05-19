@@ -31,7 +31,7 @@ public class LivroController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<LivrosDto>> listar(Long id) {
+	public ResponseEntity<List<LivrosDto>> listar() {
 		List<Livro> livros = this.livroRepository.findAll();
 		List<LivrosDto> livrosDto =  LivrosDto.toLivrosDto(livros);
 		return ResponseEntity.ok(livrosDto);
