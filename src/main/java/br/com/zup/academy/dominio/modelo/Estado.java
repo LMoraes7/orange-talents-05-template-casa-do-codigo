@@ -52,4 +52,10 @@ public class Estado {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Estado [nome=" + nome + "]";
+	}
+
 }

@@ -11,4 +11,6 @@ import br.com.zup.academy.dominio.modelo.Estado;
 public interface EstadoRepository extends JpaRepository<Estado, Long>{
 
 	Optional<Estado> findByNomeAndPaisId(String nome, Long id);
+
+	Optional<Estado> findByIdAndPaisId(Long estadoId, Long paisId);
 }

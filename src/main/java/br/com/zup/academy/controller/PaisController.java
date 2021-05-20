@@ -21,7 +21,7 @@ public class PaisController {
 	public PaisController(PaisRepository paisRepository) {
 		this.paisRepository = paisRepository;
 	}
-
+	
 	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody @Valid PaisForm paisForm) {
 		Pais pais = paisForm.toPais();

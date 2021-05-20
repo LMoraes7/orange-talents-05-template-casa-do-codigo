@@ -11,6 +11,7 @@ insert into livro(titulo, resumo, sumario, preco, paginas, identificador, data_p
 
 insert into pais(nome) values ('Brasil');
 insert into pais(nome) values ('EUA');
+insert into pais(nome) values ('Argentina');
 
 insert into estado(nome, pais_id) values ('São Paulo', 1);
 insert into estado(nome, pais_id) values ('Nevada', 2);
