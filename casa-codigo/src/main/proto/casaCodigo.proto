@@ -11,6 +11,18 @@ service CadastrarNovoAutorService {
   rpc cadastrar (CadastrarAutorRequestGrpc) returns (CadastrarAutorResponseGrpc) {}
 }
 
+service CadastrarNovaCategoriaService {
+  rpc cadastrar (CadastrarCategoriaRequestGrpc) returns (CadastrarCategoriaResponseGrpc) {}
+}
+
+message CadastrarCategoriaRequestGrpc {
+  string nome = 1;
+}
+
+message CadastrarCategoriaResponseGrpc {
+  string id = 1;
+}
+
 message CadastrarAutorRequestGrpc {
   string email = 1;
   string nome = 2;

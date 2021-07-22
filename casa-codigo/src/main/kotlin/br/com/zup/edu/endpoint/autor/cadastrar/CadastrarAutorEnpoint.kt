@@ -1,11 +1,11 @@
-package br.com.zup.edu.endpoint
+package br.com.zup.edu.endpoint.autor.cadastrar
 
 import br.com.zup.edu.CadastrarAutorRequestGrpc
 import br.com.zup.edu.CadastrarAutorResponseGrpc
 import br.com.zup.edu.CadastrarNovoAutorServiceGrpc
 import br.com.zup.edu.dominio.modelo.Autor
 import br.com.zup.edu.dominio.repository.AutorRespository
-import br.com.zup.edu.endpoint.dto.request.NovoAutorRequestDto
+import br.com.zup.edu.endpoint.autor.request.NovoAutorRequestDto
 import br.com.zup.edu.endpoint.handler.ErrorAroundHandler
 import io.grpc.stub.StreamObserver
 import io.micronaut.validation.Validated

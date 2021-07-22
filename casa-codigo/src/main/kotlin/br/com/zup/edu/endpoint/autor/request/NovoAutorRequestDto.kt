@@ -1,4 +1,4 @@
-package br.com.zup.edu.endpoint.dto.request
+package br.com.zup.edu.endpoint.autor.request
 
 import br.com.zup.edu.dominio.modelo.Autor
 import br.com.zup.edu.dominio.validacao.ValorUnico

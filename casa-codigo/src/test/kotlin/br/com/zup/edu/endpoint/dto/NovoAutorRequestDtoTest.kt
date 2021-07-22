@@ -1,7 +1,8 @@
-package br.com.zup.edu.endpoint.dto.request
+package br.com.zup.edu.endpoint.dto
 
 import br.com.zup.edu.dominio.modelo.Autor
 import br.com.zup.edu.dominio.repository.AutorRespository
+import br.com.zup.edu.endpoint.autor.request.NovoAutorRequestDto
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

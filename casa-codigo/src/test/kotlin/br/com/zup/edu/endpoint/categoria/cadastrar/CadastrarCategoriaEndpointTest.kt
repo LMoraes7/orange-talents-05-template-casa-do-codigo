@@ -1,8 +1,8 @@
-package br.com.zup.edu.endpoint
+package br.com.zup.edu.endpoint.categoria.cadastrar
 
-import br.com.zup.edu.CadastrarAutorRequestGrpc
-import br.com.zup.edu.CadastrarNovoAutorServiceGrpc
-import br.com.zup.edu.dominio.repository.AutorRespository
+import br.com.zup.edu.CadastrarCategoriaRequestGrpc
+import br.com.zup.edu.CadastrarNovaCategoriaServiceGrpc
+import br.com.zup.edu.dominio.repository.CategoriaRepository
 import io.grpc.ManagedChannel
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
@@ -18,15 +18,14 @@ import org.junit.jupiter.api.assertThrows
 import javax.inject.Singleton
 
 @MicronautTest(transactional = false)
-internal class CadastrarAutorEnpointTest(
-    private val grpcClient: CadastrarNovoAutorServiceGrpc.CadastrarNovoAutorServiceBlockingStub,
-    private val repository: AutorRespository
+internal class CadastrarCategoriaEndpointTest(
+    private val grpcClient: CadastrarNovaCategoriaServiceGrpc.CadastrarNovaCategoriaServiceBlockingStub,
+    private val repository: CategoriaRepository,
 ) {
 
-    val request = CadastrarAutorRequestGrpc.newBuilder()
-        .setEmail("diego@email.com")
-        .setNome("Diego")
-        .setDescricao("Descrição")
+    val request =
+        CadastrarCategoriaRequestGrpc.newBuilder()
+            .setNome("Esportes")
 
     @BeforeEach
     internal fun setUp() {
@@ -34,12 +33,12 @@ internal class CadastrarAutorEnpointTest(
     }
 
     @AfterEach
-    internal fun close() {
+    fun close() {
         this.repository.deleteAll()
     }
 
     @Test
-    internal fun `deve cadastrar autor`() {
+    internal fun `deve cadastrar categoria`() {
         val response = this.grpcClient.cadastrar(this.request.build())
 
         with(response) {
@@ -49,8 +48,8 @@ internal class CadastrarAutorEnpointTest(
     }
 
     @Test
-    internal fun `deve retornar um erro INVALID_ARGUMENT`() {
-        this.request.email = ""
+    internal fun `deve retornar INVALID_ARGUMENT`() {
+        this.request.nome = ""
 
         val error = assertThrows<StatusRuntimeException> { this.grpcClient.cadastrar(this.request.build()) }
 
@@ -61,11 +60,10 @@ internal class CadastrarAutorEnpointTest(
     }
 
     @Factory
-    class Client1 {
-
+    class Client2 {
         @Singleton
-        fun cadastrarAutor(@GrpcChannel(GrpcServerChannel.NAME) channel: ManagedChannel):
-                CadastrarNovoAutorServiceGrpc.CadastrarNovoAutorServiceBlockingStub =
-            CadastrarNovoAutorServiceGrpc.newBlockingStub(channel)
+        fun cadastrarCategoria(@GrpcChannel(GrpcServerChannel.NAME) channel: ManagedChannel):
+                CadastrarNovaCategoriaServiceGrpc.CadastrarNovaCategoriaServiceBlockingStub =
+            CadastrarNovaCategoriaServiceGrpc.newBlockingStub(channel)
     }
 }
