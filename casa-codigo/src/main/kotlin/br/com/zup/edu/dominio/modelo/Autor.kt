@@ -2,9 +2,7 @@ package br.com.zup.edu.dominio.modelo
 
 import java.time.LocalDateTime
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class Autor(
@@ -21,6 +19,19 @@ data class Autor(
 
     @Column(nullable = false, columnDefinition = "DATETIME")
     val registradoEm = LocalDateTime.now()
+
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL],
+        mappedBy = "autor"
+    )
+    private var livros: MutableList<Livro> = mutableListOf()
+
+    fun addLivro(livro: Livro) {
+        this.livros.add(livro)
+    }
+
+    fun getLivro(): List<Livro> = this.livros.toList()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

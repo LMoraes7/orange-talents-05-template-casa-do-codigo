@@ -1,4 +1,4 @@
-package br.com.zup.edu.endpoint.handler
+package br.com.zup.edu.handler
 
 import io.grpc.Status
 import io.grpc.stub.StreamObserver

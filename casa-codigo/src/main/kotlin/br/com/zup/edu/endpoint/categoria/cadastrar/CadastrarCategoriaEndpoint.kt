@@ -6,7 +6,7 @@ import br.com.zup.edu.CadastrarNovaCategoriaServiceGrpc
 import br.com.zup.edu.dominio.modelo.Categoria
 import br.com.zup.edu.dominio.repository.CategoriaRepository
 import br.com.zup.edu.endpoint.categoria.request.NovaCategoriaRequestDto
-import br.com.zup.edu.endpoint.handler.ErrorAroundHandler
+import br.com.zup.edu.handler.ErrorAroundHandler
 import io.grpc.stub.StreamObserver
 import javax.inject.Singleton
 import javax.transaction.Transactional

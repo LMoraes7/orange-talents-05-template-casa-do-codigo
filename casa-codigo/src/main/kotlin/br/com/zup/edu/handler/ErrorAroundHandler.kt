@@ -1,4 +1,4 @@
-package br.com.zup.edu.endpoint.handler
+package br.com.zup.edu.handler
 
 import io.micronaut.aop.Around
 import kotlin.annotation.AnnotationRetention.*

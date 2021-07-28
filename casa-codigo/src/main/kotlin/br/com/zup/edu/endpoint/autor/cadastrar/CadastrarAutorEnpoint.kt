@@ -6,7 +6,7 @@ import br.com.zup.edu.CadastrarNovoAutorServiceGrpc
 import br.com.zup.edu.dominio.modelo.Autor
 import br.com.zup.edu.dominio.repository.AutorRespository
 import br.com.zup.edu.endpoint.autor.request.NovoAutorRequestDto
-import br.com.zup.edu.endpoint.handler.ErrorAroundHandler
+import br.com.zup.edu.handler.ErrorAroundHandler
 import io.grpc.stub.StreamObserver
 import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory
