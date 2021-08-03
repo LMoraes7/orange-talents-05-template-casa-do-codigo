@@ -1,0 +1,157 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zup";
+option java_outer_classname = "CasaDoCodigoGrpc";
+option objc_class_prefix = "HLW";
+
+package br.com.zup;
+
+import "google/protobuf/timestamp.proto";
+
+service CadastrarAutorService {
+  rpc cadastrar (NovoAutorRequestGrpc) returns (NovoAutorResponseGrpc) {}
+}
+
+service CadastrarCategoriaService {
+  rpc cadastrar (NovaCategoriaRequestGrpc) returns (NovaCategoriaResponseGrpc) {}
+}
+
+service CadastrarLivroService {
+  rpc cadastrar (NovoLivroRequestGrpc) returns (NovoLivroResponseGrpc) {}
+}
+
+service CadastrarPaisService {
+  rpc cadastrar (NovoPaisRequestGrpc) returns (NovoPaisResponseGrpc) {}
+}
+
+service CadastrarEstadoService {
+  rpc cadastrar (NovoEstadoRequestGrpc) returns (NovoEstadoResponseGrpc) {}
+}
+
+service CadastrarClienteService {
+  rpc cadastrar (NovoClienteRequestGrpc) returns (NovoClienteResponseGrpc) {}
+}
+
+service ConsultarTodosLivrosService {
+  rpc consultar (ConsultarTodosLivrosRequestGrpc) returns (ConsultarTodosLivrosResponseGrpc) {}
+}
+
+service ConsultarLivroService {
+  rpc consultar (ConsultarLivroRequestGrpc) returns (ConsultarLivroResponseGrpc) {}
+}
+
+message NovoAutorRequestGrpc {
+  string nome = 1;
+  string email = 2;
+  string descricao = 3;
+}
+
+message NovoAutorResponseGrpc {
+  int64 id = 1;
+}
+
+message NovaCategoriaRequestGrpc {
+  string nome = 1;
+}
+
+message NovaCategoriaResponseGrpc {
+  int64 id = 1;
+}
+
+message NovoLivroRequestGrpc {
+  string titulo = 1;
+  string resumo = 2;
+  string sumario = 3;
+  BDecimal preco = 4;
+  int32 paginas = 5;
+  string isbn = 6;
+  google.protobuf.Timestamp data_publicacao = 7;
+  int64 categoria_id = 8;
+  int64 autor_id = 9;
+}
+
+message BDecimal {
+  int32 scale = 1;
+
+  message BInteger {
+    bytes valor_bytes = 1;
+  }
+  BInteger valor_int = 2;
+}
+
+message NovoLivroResponseGrpc {
+  int64 id = 1;
+}
+
+message NovoPaisRequestGrpc {
+  string nome = 1;
+}
+
+message NovoPaisResponseGrpc {
+  int64 id = 1;
+}
+
+message NovoEstadoRequestGrpc {
+  string nome = 1;
+  int64 pais_id = 2;
+}
+
+message NovoEstadoResponseGrpc {
+  int64 id = 1;
+}
+
+message NovoClienteRequestGrpc {
+  string email = 1;
+  string nome = 2;
+  string sobrenome = 3;
+  string documento = 4;
+
+  message Endereco {
+    string logradouro = 1;
+    optional string complemento = 2;
+    string cidade = 3;
+    string cep = 4;
+  }
+  Endereco endereco = 5;
+
+  message Regiao {
+    int64 pais_id = 1;
+    int64 estado_id = 2;
+  }
+  Regiao regiao = 6;
+  string telefone = 7;
+}
+
+message NovoClienteResponseGrpc {
+  int64 id = 1;
+}
+
+message ConsultarTodosLivrosRequestGrpc {}
+
+message ConsultarTodosLivrosResponseGrpc {
+  message Livros {
+    int64 id = 1;
+    string titulo = 2;
+  }
+  repeated Livros livros = 1;
+}
+
+message ConsultarLivroRequestGrpc {
+  int64 id = 1;
+}
+
+message ConsultarLivroResponseGrpc {
+  string titulo = 1;
+  string resumo = 2;
+  string sumario = 3;
+  BDecimal preco = 4;
+  int32 paginas = 5;
+  string isbn = 6;
+
+  message DetalhesAutor {
+    string nome = 1;
+    string descricao = 2;
+  }
+  DetalhesAutor autor = 7;
+}
